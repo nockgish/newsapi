@@ -12,20 +12,23 @@ const newsapi = new NewsAPI('ecba291e2bf642f7898dd5cff6bc5310');
 //   return response;
 // }
 
-let date = new Date();
-// console.log(date);
-date.setDate(date.getDate() - 1);
-yesterday = date.toDateString();
-console.log(yesterday);
+// let date = new Date();
+// // console.log(date);
+// date.setDate(date.getDate() - 1);
+// yesterday = date.toDateString();
+// console.log(yesterday);
 
 let today = new Date();
-console.log(today);
+let yesterday = new Date(today);
+yesterday.setDate(yesterday.getDate() - 2);
+today = today.toISOString().split('T')[0];
+yesterday = yesterday.toISOString().split('T')[0];
 
 function getNews() {
   return newsapi.v2.everything({
     q: 'ethereum AND solana',
-    from: '2025-08-16',
-    to: '2025-08-17',
+    from: yesterday,
+    to: today,
     // from: yesterday,
     // to: today,
     language: 'en',
